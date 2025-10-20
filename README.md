@@ -14,7 +14,6 @@ This project promotes **sustainable fashion** and reduces decision fatigue.
 - **DeepFashion** (classification & attributes): https://mmlab.ie.cuhk.edu.hk/projects/DeepFashion.html
 - (Optional) **Text2Human** (outfit visualization): https://github.com/yumingj/Text2Human
 
-> This template includes DeepFashion *sample images* only for Deliverable 1 verification.
 
 ##  Repository Structure
 ```
