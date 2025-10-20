@@ -1,9 +1,13 @@
+pandas
+numpy
+jupyter
+scikit-learn
+tensorflow
 torch
 torchvision
-opencv-python
-numpy
-pandas
+keras
+Pillow
 matplotlib
 streamlit
 gradio
-Pillow
+opencv-python
