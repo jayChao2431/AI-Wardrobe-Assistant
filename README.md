@@ -1,14 +1,17 @@
-#  AI-Wardrobe-Assistant
+# AI-Powered-Wardrobe-Assistant
 
-An **AI-driven virtual stylist** that helps users organize their wardrobe, classify clothes, and generate stylish outfit recommendations — extensible to visualize outfits in the future.
+An **AI-driven virtual stylist** that helps users organize their wardrobe and generate daily outfit recommendations using the clothes they already own.
 
-##  Project Overview
-Users can upload photos of their clothes, and the system will:
-1) **Classify** the item (category, color, style)
-2) **Recommend** compatible pieces based on real-world fashion data
-3) (Future) **Visualize** outfits on a human figure (e.g., Text2Human)
+---
 
-This project promotes **sustainable fashion** and reduces decision fatigue.
+## Project Overview
+Have you ever looked at your closet full of clothes and still felt like you had nothing to wear?  
+This project builds an AI assistant that:
+- Digitizes your wardrobe using image recognition
+- Classifies each clothing item (e.g., shirt, jeans, shoes)
+- Recommends stylish outfit combinations based on professional fashion datasets
+
+By encouraging reuse of existing clothes, this app promotes **sustainable fashion** and **reduces decision fatigue**.
 
 ##  Datasets and Sources
 - **DeepFashion** (classification & attributes): https://mmlab.ie.cuhk.edu.hk/projects/DeepFashion.html
