@@ -14,8 +14,14 @@ This project builds an AI assistant that:
 By encouraging reuse of existing clothes, this app promotes **sustainable fashion** and **reduces decision fatigue**.
 
 ##  Datasets and Sources
-- **DeepFashion** (classification & attributes): https://mmlab.ie.cuhk.edu.hk/projects/DeepFashion.html
-- (Optional) **Text2Human** (outfit visualization): https://github.com/yumingj/Text2Human
+
+| Source | Purpose | Description |
+|--------|----------|-------------|
+| [**DeepFashion**](https://mmlab.ie.cuhk.edu.hk/projects/DeepFashion.html) | Clothing classification | Large-scale dataset for fashion recognition with category & attribute labels |
+| [**Text2Human**](https://github.com/yumingj/Text2Human) | Outfit visualization | Generates human images from text descriptions of outfits |
+
+**Data format:** JPEG / PNG images + attribute annotations  
+**Preprocessing:** Resize to 224×224, normalize RGB, extract color & style embeddings
 
 
 ##  Repository Structure
