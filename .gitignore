@@ -1,0 +1,48 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Large dataset files
+data/polyvore/
+data/deepfashion/
+
+# Model files (too large for GitHub)
+results/model_best.pth
+results/gallery_index.npz
+
+# Logs
+*.log
+gallery_build.log
+
+# Virtual environments
+UF_AML/
+.venv/
