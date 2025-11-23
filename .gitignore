@@ -46,3 +46,20 @@ gallery_build.log
 # Virtual environments
 UF_AML/
 .venv/
+
+# Ignore more large files and folders
+*.npy
+*.npz
+*.pth
+*.pt
+*.ckpt
+*.h5
+*.pkl
+*.csv
+*.json
+*.xlsx
+*.zip
+*.tar.gz
+results/
+data/
+datasets/
