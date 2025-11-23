@@ -1,19 +1,8 @@
 # AI-Powered Wardrobe Recommender
 
 An intelligent fashion recommendation system powered by **OpenAI CLIP** with ensemble classification, smart validation, and explainable recommendations.
-# AI-Powered Wardrobe Recommender 👔
-
-![Python](https://img.shields.io/badge/Python-3.12-blue.svg)
-![PyTorch](https://img.shields.io/badge/PyTorch-2.0-red.svg)
-![CLIP](https://img.shields.io/badge/CLIP-ViT-B/32-orange.svg)
-![Streamlit](https://img.shields.io/badge/Streamlit-1.51.0-FF4B4B.svg)
-![License](https://img.shields.io/badge/License-MIT-green.svg)
-![Status](https://img.shields.io/badge/Status-Production-success.svg)
-
-An intelligent fashion recommendation system powered by **OpenAI CLIP** with ensemble classification, smart validation, and explainable recommendations.
 
 **Performance:** 73.47% Accuracy | 6,844 Gallery Items | ~0.8s Processing Time
-**Architecture:** CLIP ViT-B/32 + Ensemble (95%/3%/2%) + Smart Validator + Recommendation Explainer
 
 ---
 
@@ -24,7 +13,7 @@ This project evolved from a ResNet50-based classifier to a CLIP-powered ensemble
 - Deliverable 2 (ResNet50): 56.6% accuracy
 - Deliverable 3 v1 (CLIP Only): 62.0% accuracy
 - Deliverable 3 v2 (CLIP + Keyword): 68.0% accuracy
-- Deliverable 3 v4 (Full Ensemble): 73.47% accuracy
+- Deliverable 3 v3 (Full Ensemble): 73.47% accuracy
 
 The current system combines CLIP-based visual understanding, ensemble classification, smart validation, and explainable recommendations. It achieves 73.47% accuracy on fashion categorization and provides detailed explanations for each recommendation.
 
@@ -208,57 +197,79 @@ streamlit run ui/app_streamlit.py --server.port 8501
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 AI-Wardrobe-Assistant/
 │
-├── ui/                                # Web Interface
-│   └── app_streamlit.py              # Main Streamlit application
+├── ui/
+│   └── app_streamlit.py
 │
-├── src/                               # Core Modules
-│   ├── ensemble_classifier.py        # CLIP + Keyword + Path fusion
-│   ├── smart_validator.py            # Confidence-based validation
-│   ├── recommender.py                # Cosine similarity search
-│   ├── recommendation_explainer.py   # Explainable AI module
-│   ├── model.py                      # ResNet50 classifier (legacy)
-│   ├── train.py                      # Training script
-│   ├── evaluate.py                   # Evaluation script
-│   ├── dataset_loader.py             # Data loading utilities
-│   ├── build_gallery_index.py        # Gallery indexing tool
-│   ├── download_polyvore.py          # Dataset download script
-│   └── organize_deepfashion.py       # Dataset organization tool
+├── src/
+│   ├── ensemble_classifier.py
+│   ├── smart_validator.py
+│   ├── recommender.py
+│   ├── recommendation_explainer.py
+│   ├── model.py
+│   ├── train.py
+│   ├── evaluate.py
+│   ├── dataset_loader.py
+│   ├── build_gallery_index.py
+│   ├── download_polyvore.py
+│   └── organize_deepfashion.py
 │
-├── results/                           # Model Outputs & Artifacts
-│   ├── model_best.pth                # Trained ResNet50 (legacy)
-│   ├── gallery_embeddings.npy        # CLIP embeddings
-│   ├── gallery_index.npz             # Feature index
-│   ├── gallery_meta.json             # Metadata (6,844 items)
-│   ├── class_to_idx.json             # Category mapping
-│   ├── evaluation_report.md          # Performance metrics
-│   └── deliverable3_*.png            # Evaluation visualizations
+├── results/
+│   ├── model_best.pth
+│   ├── gallery_embeddings.npy
+│   ├── gallery_index.npz
+│   ├── gallery_meta.json
+│   ├── class_to_idx.json
+│   ├── evaluation_report.md
+│   ├── category_distribution.png
+│   ├── confusion_matrix.png
+│   ├── deliverable3_component_contribution.png
+│   ├── deliverable3_confidence_analysis.png
+│   ├── deliverable3_ensemble_confusion_matrix.png
+│   ├── deliverable3_ensemble_evaluation_report.json
+│   ├── deliverable3_ensemble_per_class_metrics.png
+│   ├── deliverable3_metrics.json
+│   ├── deliverable3_prediction_examples.png
+│   ├── deliverable3_system_evolution.png
+│   ├── deliverable3_test_samples.png
+│   ├── test_metrics.json
+│   └── ieee_report/
 │
-├── data/                              # Datasets (~3.2GB)
-│   ├── polyvore/                     # Polyvore outfit dataset
-│   ├── dresscode/                    # Men's fashion dataset
-│   └── deepfashion/                  # DeepFashion subset
+├── data/
+│   ├── augmented/
+│   ├── deepfashion_gender_metadata.json
+│   ├── deepfashion_subset/
+│   ├── dresscode/
+│   ├── polyvore/
+│   ├── README.md
+│   └── README.md.backup
 │
-├── datasets/                          # Kaggle datasets (~3.1GB)
+├── datasets/
+│   ├── dresscode_mens/
+│   ├── images/
+│   ├── item_metadata.json
+│   └── item_title.json
 │
-├── docs/                              # Documentation
-│   ├── DELIVERABLE3_COMPLETE_REPORT.md  # Comprehensive report
-│   ├── STREAMLIT_GUIDE.md            # UI documentation
-│   └── STREAMLIT_READY.md            # Deployment guide
+├── docs/
+│   └── DELIVERABLE3_COMPLETE_REPORT.md
 │
-├── notebooks/                         # Jupyter Notebooks
+├── notebooks/
+│   ├── deliverable3_ensemble_training.ipynb
+│   └── deliverable3_evaluation_v4.ipynb
 │
-├── requirements.txt                   # Python dependencies
-├── start_ui.sh                        # Quick launch script
-├── README.md                          # 📖 This file
-├── evaluate_deliverable3_v4.py        # Latest evaluation script
-├── evaluate_system.py                 # System evaluation
-└── generate_ieee_visualizations.py    # IEEE paper figures
+├── requirements.txt
+├── start_ui.sh
+├── README.md
+├── evaluate_deliverable3_v4.py
+├── evaluate_system.py
+└── generate_ieee_visualizations.py
 ```
+
+├── README.md                           # Project documentation
 
 **Key Components:**
 
@@ -290,14 +301,14 @@ AI-Wardrobe-Assistant/
 **Phase 3: Smart Validator**
 
 - Confidence-based validation: High (>0.90), Medium (>0.70), Low (>0.50)
-- Error pattern detection: Known confusion pairs (tee�blouse, pants�shorts)
+  - Error pattern detection: Known confusion pairs (tee <-> blouse, pants <-> shorts)
 - Consistency checks: Text-category alignment verification
 
 ### Performance Metrics (Current System)
 
 | Component              | Baseline (Pure CLIP) | Ensemble + Validator  | Final System                  |
 | ---------------------- | -------------------- | --------------------- | ----------------------------- |
-| **Accuracy**     | 62.0%                | 68.0%                 | **73.47%** ✨           |
+| **Accuracy**     | 62.0%                | 68.0%                 | **73.47%**           |
 | **Test Set**     | 98 images            | 98 images             | 98 images                     |
 | **Strategy**     | Simple prompts       | Multi-signal (95/3/2) | + Smart Validator + Explainer |
 | **Thresholds**   | N/A                  | N/A                   | 0.90/0.70/0.50                |
@@ -379,16 +390,15 @@ prompts = {
 
 ### Recommendation Algorithm
 
-1. **Feature Extraction**: Query image � CLIP encoder � 512-dim embedding
+1. **Feature Extraction**: Query image <-> CLIP encoder <-> 512-dim embedding
 2. **Similarity Search**: Cosine similarity vs 6,000 gallery embeddings
 3. **Category Filtering**: Same category as classified result
 4. **Ranking**: Sort by similarity score (descending)
 5. **Top-k Selection**: Return 5 most similar items
 
 **Similarity Metric**:
+similarity(query, gallery_item) = (query <-> gallery_item) / (||query|| × ||gallery_item||)
 
-```
-similarity(query, gallery_item) = (query � gallery_item) / (||query|| × ||gallery_item||)
 ```
 
 ### Device Compatibility
@@ -442,13 +452,13 @@ Known Error Patterns:
 
 ### System Evolution
 
-| Metric                     | Baseline (CLIP) | Deliverable 2    | Deliverable 3             | Improvement                    |
-| -------------------------- | --------------- | ---------------- | ------------------------- | ------------------------------ |
-| **Accuracy**         | 62.0%           | 56.6% (ResNet50) | **73.47%**          | **+16.87%**              |
-| **Architecture**     | Pure CLIP       | ResNet50         | CLIP Ensemble + Validator | Multi-modal                    |
-| **Gallery Size**     | 6,000           | 6,000            | **6,844**           | **+844 items**           |
-| **Features**         | Basic           | Classification   | + Explainer + Validator   | Advanced                       |
-| **Gender Detection** | No labels      | No labels        | Zero-shot                | +Gender intelligence     |
+| Metric                     | Baseline (CLIP) | Deliverable 2    | Deliverable 3             | Improvement          |
+| -------------------------- | --------------- | ---------------- | ------------------------- | -------------------- |
+| **Accuracy**         | 62.0%           | 56.6% (ResNet50) | **73.47%**          | **+16.87%**    |
+| **Architecture**     | Pure CLIP       | ResNet50         | CLIP Ensemble + Validator | Multi-modal          |
+| **Gallery Size**     | 6,000           | 6,000            | **6,844**           | **+844 items** |
+| **Features**         | Basic           | Classification   | + Explainer + Validator   | Advanced             |
+| **Gender Detection** | No labels       | No labels        | Zero-shot                 | +Gender intelligence |
 
 ### New Capabilities
 
@@ -591,3 +601,4 @@ Special thanks to:
 Contact: tzuchiehchao@ufl.edu
 Project Link: https://github.com/jayChao2431/AI-Wardrobe-Assistant
 For questions or suggestions, please open an issue on GitHub.
+```
