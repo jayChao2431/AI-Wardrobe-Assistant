@@ -1,0 +1,7 @@
+{
+  "model_type": "CLIP",
+  "model_name": "ViT-B/32",
+  "feature_dim": 512,
+  "gallery_size": 6000,
+  "updated_at": "2025-11-20"
+}

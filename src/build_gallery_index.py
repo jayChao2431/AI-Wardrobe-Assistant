@@ -1,5 +1,8 @@
 # All comments in English.
-import os, json, sys
+from src.model import ResNet50Classifier
+import os
+import json
+import sys
 import numpy as np
 from PIL import Image
 import torch
@@ -9,16 +12,18 @@ from tqdm import tqdm
 
 # Add parent directory to path for imports
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from src.model import ResNet50Classifier
 
 GALLERY_DIR = "data/polyvore"  # Use full Polyvore dataset
 RESULTS_DIR = "results"
-MODEL_PATH  = os.path.join(RESULTS_DIR, "model_best.pth")
-CLASSMAP    = os.path.join(RESULTS_DIR, "class_to_idx.json")
-BATCH_SIZE  = 32  # Process multiple images at once for speed
+MODEL_PATH = os.path.join(RESULTS_DIR, "model_best.pth")
+CLASSMAP = os.path.join(RESULTS_DIR, "class_to_idx.json")
+BATCH_SIZE = 32  # Process multiple images at once for speed
+# Mid-size demo: 10K images (~20 mins) (set to None for full dataset)
+MAX_IMAGES = 10000
+
 
 def collect_image_paths(root):
-    exts = {'.jpg','.jpeg','.png'}
+    exts = {'.jpg', '.jpeg', '.png'}
     paths = []
     for dirpath, _, filenames in os.walk(root):
         for fn in filenames:
@@ -26,15 +31,17 @@ def collect_image_paths(root):
                 paths.append(os.path.join(dirpath, fn))
     return sorted(paths)
 
+
 class ImageDataset(Dataset):
     """Simple dataset for batch processing images"""
+
     def __init__(self, image_paths, transform):
         self.image_paths = image_paths
         self.transform = transform
-    
+
     def __len__(self):
         return len(self.image_paths)
-    
+
     def __getitem__(self, idx):
         img_path = self.image_paths[idx]
         try:
@@ -46,10 +53,11 @@ class ImageDataset(Dataset):
             # Return dummy tensor for failed images
             return torch.zeros(3, 224, 224), img_path, False
 
+
 @torch.no_grad()
 def main():
     os.makedirs(RESULTS_DIR, exist_ok=True)
-    
+
     # Device selection: prioritize MPS (Apple Silicon), then CUDA, then CPU
     if torch.backends.mps.is_available():
         device = "mps"
@@ -72,22 +80,30 @@ def main():
 
     # Transform
     tfm = transforms.Compose([
-        transforms.Resize((224,224)),
+        transforms.Resize((224, 224)),
         transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485,0.456,0.406], std=[0.229,0.224,0.225])
+        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[
+                             0.229, 0.224, 0.225])
     ])
 
     # Collect all image paths
     print("Collecting image paths...")
     img_paths = collect_image_paths(GALLERY_DIR)
-    print(f"Found {len(img_paths)} images")
+
+    # Limit to MAX_IMAGES for lightweight demo
+    if MAX_IMAGES is not None and len(img_paths) > MAX_IMAGES:
+        print(
+            f"Found {len(img_paths)} images, limiting to {MAX_IMAGES} for demo")
+        img_paths = img_paths[:MAX_IMAGES]
+    else:
+        print(f"Found {len(img_paths)} images")
 
     # Create dataset and dataloader for batch processing
     dataset = ImageDataset(img_paths, tfm)
     loader = DataLoader(
-        dataset, 
-        batch_size=BATCH_SIZE, 
-        shuffle=False, 
+        dataset,
+        batch_size=BATCH_SIZE,
+        shuffle=False,
         num_workers=2,  # Parallel data loading
         pin_memory=(device != "cpu")
     )
@@ -95,21 +111,22 @@ def main():
     # Extract features in batches
     feats_list, meta = [], []
     print("Extracting features...")
-    
+
     for batch_imgs, batch_paths, batch_valid in tqdm(loader, desc="Processing batches"):
         batch_imgs = batch_imgs.to(device)
         _, feats = model(batch_imgs)  # (batch_size, 2048)
         feats_np = feats.cpu().numpy()
-        
+
         for i, (img_path, is_valid) in enumerate(zip(batch_paths, batch_valid)):
             if is_valid:
                 feats_list.append(feats_np[i])
                 meta.append({"image_path": img_path})
 
     # Save results
-    feats_mat = np.stack(feats_list, axis=0) if feats_list else np.zeros((0,2048), dtype=np.float32)
+    feats_mat = np.stack(feats_list, axis=0) if feats_list else np.zeros(
+        (0, 2048), dtype=np.float32)
     np.savez(os.path.join(RESULTS_DIR, "gallery_index.npz"), feats=feats_mat)
-    
+
     with open(os.path.join(RESULTS_DIR, "gallery_meta.json"), "w") as f:
         json.dump(meta, f, indent=2)
 
@@ -117,6 +134,7 @@ def main():
     print(f"  Total images processed: {len(meta)}")
     print(f"  Feature matrix shape: {feats_mat.shape}")
     print(f"  Saved to: results/gallery_index.npz and gallery_meta.json")
+
 
 if __name__ == "__main__":
     main()

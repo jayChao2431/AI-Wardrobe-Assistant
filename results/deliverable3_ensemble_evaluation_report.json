@@ -1,0 +1,119 @@
+{
+  "system_info": {
+    "model": "Ensemble CLIP-Based Fashion Classifier",
+    "version": "Deliverable 3 v4.0",
+    "date": "2025-01-22",
+    "device": "mps"
+  },
+  "architecture": {
+    "components": [
+      {
+        "name": "CLIP ViT-B/32",
+        "weight": 0.95,
+        "role": "Primary visual understanding"
+      },
+      {
+        "name": "Keyword Classifier",
+        "weight": 0.03,
+        "role": "Text-based disambiguation"
+      },
+      {
+        "name": "Path Analyzer",
+        "weight": 0.02,
+        "role": "File naming patterns"
+      },
+      {
+        "name": "Smart Validator",
+        "weight": null,
+        "role": "Confidence validation"
+      }
+    ]
+  },
+  "dataset": {
+    "source": "DeepFashion Category Prediction Dataset",
+    "training_size": 671,
+    "test_size": 150,
+    "num_categories": 7,
+    "categories": [
+      "Blazer",
+      "Blouse",
+      "Dress",
+      "Skirt",
+      "Tee",
+      "Pants",
+      "Shorts"
+    ]
+  },
+  "overall_performance": {
+    "accuracy": 0.7266666666666667,
+    "average_confidence": 0.7891080729166666,
+    "macro_precision": 0.5694989106753813,
+    "macro_recall": 0.5190476190476191,
+    "macro_f1": 0.525916643460503
+  },
+  "per_class_metrics": {
+    "Blazer": {
+      "precision": 0.8666666666666667,
+      "recall": 0.43333333333333335,
+      "f1_score": 0.5777777777777777,
+      "support": 30
+    },
+    "Blouse": {
+      "precision": 0.49019607843137253,
+      "recall": 0.8333333333333334,
+      "f1_score": 0.6172839506172839,
+      "support": 30
+    },
+    "Dress": {
+      "precision": 0.8333333333333334,
+      "recall": 0.8333333333333334,
+      "f1_score": 0.8333333333333334,
+      "support": 30
+    },
+    "Skirt": {
+      "precision": 0.9629629629629629,
+      "recall": 0.8666666666666667,
+      "f1_score": 0.9122807017543859,
+      "support": 30
+    },
+    "Tee": {
+      "precision": 0.8333333333333334,
+      "recall": 0.6666666666666666,
+      "f1_score": 0.7407407407407407,
+      "support": 30
+    },
+    "Pants": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1_score": 0.0,
+      "support": 0
+    },
+    "Shorts": {
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1_score": 0.0,
+      "support": 0
+    }
+  },
+  "confidence_analysis": {
+    "correct_predictions": {
+      "mean_confidence": 0.8290186890768348,
+      "std_confidence": 0.15778056232302404
+    },
+    "incorrect_predictions": {
+      "mean_confidence": 0.6830042397103658,
+      "std_confidence": 0.16047465225293567
+    },
+    "threshold_distribution": {
+      "high_confidence": 52,
+      "medium_confidence": 51,
+      "low_confidence": 34
+    }
+  },
+  "improvement_from_baseline": {
+    "baseline_accuracy": 0.566,
+    "current_accuracy": 0.7266666666666667,
+    "absolute_improvement": 0.16066666666666674,
+    "relative_improvement": 0.2838633686690226
+  }
+}

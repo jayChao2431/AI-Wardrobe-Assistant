@@ -1,0 +1,38 @@
+{
+  "blazer": {
+    "current_samples": 56,
+    "target_samples": 300,
+    "augmentation_factor": 5.4,
+    "techniques": [
+      "RandomHorizontalFlip (p=0.5)",
+      "RandomRotation (\u00b115\u00b0)",
+      "ColorJitter (brightness=0.3, contrast=0.3)",
+      "RandomAffine (translate=0.1, scale=0.9-1.1)",
+      "RandomPerspective (distortion=0.2)"
+    ],
+    "priority": "CRITICAL"
+  },
+  "shorts": {
+    "current_samples": 215,
+    "target_samples": 500,
+    "augmentation_factor": 2.3,
+    "techniques": [
+      "RandomHorizontalFlip (p=0.5)",
+      "RandomRotation (\u00b110\u00b0)",
+      "ColorJitter (brightness=0.2, contrast=0.2)",
+      "RandomAffine (translate=0.1)"
+    ],
+    "priority": "HIGH"
+  },
+  "blouse": {
+    "current_samples": 385,
+    "target_samples": 700,
+    "augmentation_factor": 1.8,
+    "techniques": [
+      "RandomHorizontalFlip (p=0.5)",
+      "RandomRotation (\u00b110\u00b0)",
+      "ColorJitter (brightness=0.2)"
+    ],
+    "priority": "MEDIUM"
+  }
+}

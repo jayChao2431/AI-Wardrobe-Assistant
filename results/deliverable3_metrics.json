@@ -1,0 +1,59 @@
+{
+  "deliverable": 3,
+  "test_accuracy": 0.6533333333333333,
+  "per_class_metrics": {
+    "Blazer": {
+      "precision": 0.65625,
+      "recall": 0.7,
+      "f1_score": 0.6774193548387096,
+      "support": 30,
+      "auc": 0.8880555555555555
+    },
+    "Blouse": {
+      "precision": 0.5517241379310345,
+      "recall": 0.5333333333333333,
+      "f1_score": 0.5423728813559322,
+      "support": 30,
+      "auc": 0.8127777777777777
+    },
+    "Dress": {
+      "precision": 0.8076923076923077,
+      "recall": 0.7,
+      "f1_score": 0.75,
+      "support": 30,
+      "auc": 0.9208333333333334
+    },
+    "Skirt": {
+      "precision": 0.7142857142857143,
+      "recall": 0.6666666666666666,
+      "f1_score": 0.6896551724137931,
+      "support": 30,
+      "auc": 0.8694444444444445
+    },
+    "Tee": {
+      "precision": 0.5714285714285714,
+      "recall": 0.6666666666666666,
+      "f1_score": 0.6153846153846154,
+      "support": 30,
+      "auc": 0.8547222222222223
+    }
+  },
+  "macro_averages": {
+    "precision": 0.6602761462675255,
+    "recall": 0.6533333333333333,
+    "f1_score": 0.6549664047986101,
+    "auc": 0.8691666666666666
+  },
+  "error_analysis": {
+    "total_errors": 52,
+    "error_rate": 0.3466666666666667,
+    "avg_error_confidence": 0.699877142906189,
+    "avg_correct_confidence": 0.8781609535217285
+  },
+  "improvements_from_d2": {
+    "accuracy_gain": "+8.73%",
+    "precision_gain": "+8.83%",
+    "recall_gain": "+8.73%",
+    "f1_gain": "+8.70%"
+  }
+}

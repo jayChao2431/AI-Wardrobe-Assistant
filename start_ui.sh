@@ -47,4 +47,4 @@ echo ""
 echo "Press Ctrl+C to stop the server"
 echo ""
 
-/Users/chaotzuchieh/Documents/GitHub/UF_AML/bin/streamlit run app_streamlit.py
+/Users/chaotzuchieh/Documents/GitHub/UF_AML/bin/streamlit run ui/app_streamlit.py
